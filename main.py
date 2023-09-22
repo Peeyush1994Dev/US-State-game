@@ -1,6 +1,7 @@
 from turtle import Turtle , Screen
 import turtle
 import pandas
+import csv
 
 screen = Screen()
 
@@ -20,6 +21,23 @@ answer_state_list = []
 # print(data_state_list)
 while len(answer_state_list) < 50:
     answer_state = screen.textinput(f"{len(answer_state_list)}/50 the State remaining","what is the another state name")
+
+
+    ##Purpose is to end the game by typing Exit. Post that it give which all states we miss as a learing documents
+
+    if answer_state == "Exist":
+        set_state = set(data_state_list)
+        set_answer_state = set(answer_state_list)
+
+        left_states = set_state ^ set_answer_state
+
+        left_states_data = pandas.DataFrame(left_states)
+        left_states_data.to_csv("left state CSV data.csv")
+        # print(left_states_data)
+
+
+        break
+
 
     if answer_state in data_state_list:
 
